@@ -16,10 +16,10 @@ class CreateRolesTable extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('display_name')->nullable();
-            $table->longtext('description')->nullable();
+            $table->longText('description')->nullable();
             $table->boolean('is_admin')->default(0);
             $table->timestamps();
-            $table->softdeletes();
+            $table->softDeletes();
         });
     }
 
