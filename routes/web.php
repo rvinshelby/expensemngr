@@ -12,12 +12,12 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('home');
+    return redirect()->route('dashboard');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function(){
     Route::resource('users', 'UserController')->except([

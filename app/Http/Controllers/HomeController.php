@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Expense;
+use App\ExpenseCategory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $expenses = Expense::all();
+        $cats = ExpenseCategory::all();
+        return view('home', compact('expenses', 'cats'));
+    }
+
+    public function getStats()
+    {
+        $expenses = Expense::all();
+        $cats = ExpenseCategory::all();
+
+        
+
     }
 }
