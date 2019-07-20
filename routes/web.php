@@ -26,4 +26,10 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('roles', 'RoleController')->except([
         'create', 'edit'
     ]);
+    Route::resource('expenses/categories', 'ExpenseCategoryController')->except([
+        'create', 'edit'
+    ]);
+    Route::resource('expenses', 'ExpenseController')->except([
+        'create', 'edit'
+    ]);
 });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Expense;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateExpenseRequest;
+use App\Http\Requests\UpdateExpenseRequest;
 
 class ExpenseController extends Controller
 {
@@ -33,9 +35,24 @@ class ExpenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateExpenseRequest $request)
     {
-        //
+        if($request->validated()) {
+            $expense = new Expense();
+            $expense->fill($request->all());
+            $expense->save();
+
+            return redirect()->route('expenses.index')
+                             ->with('status', [
+                                'msg'       =>  'Expense Successfully Created.',
+                                'variant'   =>  'success',
+                             ]);
+        }
+        return redirect()->back()
+                            ->with('status', [
+                            'msg'       =>  'Something Went Wrong.',
+                            'variant'   =>  'danger',
+                            ]);
     }
 
     /**
@@ -67,9 +84,23 @@ class ExpenseController extends Controller
      * @param  \App\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expense $expense)
+    public function update(UpdateExpenseRequest $request, Expense $expense)
     {
-        //
+        if($request->validated()) {
+            $expense->fill($request->all());
+            $expense->save();
+
+            return redirect()->route('expenses.index')
+                             ->with('status', [
+                                'msg'       =>  'Expense Successfully Updated.',
+                                'variant'   =>  'success',
+                             ]);
+        }
+        return redirect()->back()
+                            ->with('status', [
+                            'msg'       =>  'Something Went Wrong.',
+                            'variant'   =>  'danger',
+                            ]);
     }
 
     /**
@@ -80,6 +111,11 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        //
+        $expense->delete();
+        return redirect()->route('expenses.index')
+                            ->with('status', [
+                            'msg'       =>  'Expense Successfully Removed.',
+                            'variant'   =>  'success',
+                            ]);
     }
 }

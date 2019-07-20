@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\ExpenseCategory;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateExpenseCategoryRequest;
+use App\Http\Requests\UpdateExpenseCategoryRequest;
 
 class ExpenseCategoryController extends Controller
 {
@@ -14,7 +16,7 @@ class ExpenseCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $cat = ExpenseCategory::paginate(10);
     }
 
     /**
@@ -33,9 +35,24 @@ class ExpenseCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateExpenseCategoryRequest $request)
     {
-        //
+        if($request->validated()) {
+            $expenseCategory = new ExpenseCategory();
+            $expenseCategory->fill($request->all());
+            $expenseCategory->save();
+
+            return redirect()->route('categories.index')
+                             ->with('status', [
+                                'msg'       =>  'Category Successfully Created.',
+                                'variant'   =>  'success',
+                             ]);
+        }
+        return redirect()->back()
+                            ->with('status', [
+                            'msg'       =>  'Something Went Wrong.',
+                            'variant'   =>  'danger',
+                            ]);
     }
 
     /**
@@ -67,9 +84,23 @@ class ExpenseCategoryController extends Controller
      * @param  \App\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ExpenseCategory $expenseCategory)
+    public function update(UpdateExpenseCategoryRequest $request, ExpenseCategory $expenseCategory)
     {
-        //
+        if($request->validated()) {
+            $expenseCategory->fill($request->all());
+            $expenseCategory->save();
+
+            return redirect()->route('categories.index')
+                             ->with('status', [
+                                'msg'       =>  'Category Successfully Created.',
+                                'variant'   =>  'success',
+                             ]);
+        }
+        return redirect()->back()
+                            ->with('status', [
+                            'msg'       =>  'Something Went Wrong.',
+                            'variant'   =>  'danger',
+                            ]);
     }
 
     /**
@@ -80,6 +111,12 @@ class ExpenseCategoryController extends Controller
      */
     public function destroy(ExpenseCategory $expenseCategory)
     {
-        //
+        $expenseCategory->delete();
+        return redirect()->route('categories.index')
+                            ->with('status', [
+                            'msg'       =>  'Category Successfully Removed.',
+                            'variant'   =>  'success',
+                            ]);
+    }
     }
 }
