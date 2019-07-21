@@ -19,6 +19,7 @@ class UserController extends Controller
     {
         $users = User::paginate(10);
         $roles = Role::all();
+        return view('user_management.users.index', compact('users', 'roles'));
     }
 
     /**
@@ -90,7 +91,14 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         if($request->validated()) {
-            $user->fill($request->all());
+            $user->fill([
+                'name'      =>  $request->name,
+                'email'      =>  $request->email,
+                'role_id'      =>  $request->role_id,
+            ]);
+            if($request->password) {
+                $user->password = bcrypt($request->password);
+            }
             $user->save();
 
             return redirect()->route('users.index')

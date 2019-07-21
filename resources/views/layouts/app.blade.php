@@ -46,15 +46,32 @@
                                 {{ \Session::get('status')['msg'] }}
                             </div>
                         @endif
-                        @yield('content')
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="container">
+                            <div class="justify-content-center">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            @yield('content')
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="/js/jquery.js"></script>
     <script src="/js/sb-admin.min.js"></script>
     <script src="/js/chart.min.js"></script>
+    @yield('footer-scripts')
     <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

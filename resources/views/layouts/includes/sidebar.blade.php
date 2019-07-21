@@ -16,9 +16,9 @@
       </div>
 
       <div class="text-center d-none d-md-inline text-white" style="margin-bottom: 1rem;">
-          {{--  <p style="margin:0;padding:0 7px;">{{ \Auth::user()->name }}</p>  --}}
+          <p style="margin:0;padding:0 7px;">{{ \Auth::user()->name }}</p>
           <small style="padding:0 7px;">
-              {{--  <em>{{ isset(\Auth::user()->role) ? '('.\Auth::user()->role->display_name.')' : '' }}</em>  --}}
+              <em>{{ isset(\Auth::user()->role) ? '('.\Auth::user()->role->display_name.')' : '' }}</em>
           </small>
       </div>
       
@@ -64,8 +64,8 @@
 
         @if(\Auth::user()->role->is_admin)
 
-            <li class="nav-item {{ (Request::segment(1) == 'users') ? 'active' : '' }}" style="padding-top:0;">
-                <a class="nav-link" href="{{ route('users.index') }}">
+            <li class="nav-item {{ (Request::segment(2) == 'categories') ? 'active' : '' }}" style="padding-top:0;">
+                <a class="nav-link" href="{{ route('categories.index') }}">
                     <i class="fas fa-fw fa-user-cog"></i>
                     <span>Expense Categories</span></a>
             </li>

@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'name'      =>  'required',
             'role_id'   =>  'required',
-            'password'  =>  'required|confirmed|different:old_password',
+            'password'  =>  'confirmed',
         ];
     }
 }
