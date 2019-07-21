@@ -17,7 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/getdata', 'HomeController@getStats')->name('get.data');
 
 Route::middleware(['auth'])->group(function(){
     Route::resource('users', 'UserController')->except([

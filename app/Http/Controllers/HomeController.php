@@ -25,17 +25,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::all();
         $cats = ExpenseCategory::all();
-        return view('home', compact('expenses', 'cats'));
+        return view('dashboard.index', compact('cats'));
     }
 
     public function getStats()
     {
-        $expenses = Expense::all();
+        $labels = array();
+        $data = array();
         $cats = ExpenseCategory::all();
-
+        foreach($cats as $cat) {
+            $labels[] = $cat->display_name;
+            $data[] = $cat->expenses->sum('amount');
+        }
         
+        return response()
+                    ->json([
+                        'labels'    =>  $labels,
+                        'data'      =>  $data,
+                    ]);
 
     }
 }

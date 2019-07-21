@@ -37,7 +37,7 @@
                             <div class="col-md-8">
                                 <h2>@yield('title')</h2>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 text-right">
                                 <small>@yield('breadcrumbs')</small>
                             </div>
                         </div>
