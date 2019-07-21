@@ -118,5 +118,4 @@ class ExpenseCategoryController extends Controller
                             'variant'   =>  'success',
                             ]);
     }
-    }
 }
