@@ -36,7 +36,6 @@ require('./bootstrap');
 
 import Chart from 'chart.js';
 document.addEventListener('DOMContentLoaded', function () {
-
 var serviceUri = '/getdata';
 var ctx = document.getElementById("dashboardPieChart");
 function renderChart() {

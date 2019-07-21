@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateExpenseRequest extends FormRequest
+class ChangePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +24,8 @@ class CreateExpenseRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount'                =>  'required|numeric',
-            'expense_category_id'   =>  'required',
-            'entry_date'            =>  'required'
+            'old_password'  =>  'required',
+            'password'  =>  'required|confirmed|different:old_password',
         ];
     }
 }

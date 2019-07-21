@@ -68,6 +68,7 @@
             </div>
         </div>
     </div>
+    @include('layouts.includes.modals.changepassword')
     <script src="/js/jquery.js"></script>
     <script src="/js/sb-admin.min.js"></script>
     <script src="/js/chart.min.js"></script>

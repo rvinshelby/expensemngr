@@ -43,6 +43,7 @@ User Management > Users
       @endforeach
   </tbody>
 </table>
+{{ $users->links() }}
 @include('user_management.users.includes.modals.delete')
 @include('user_management.users.includes.modals.update')
 @include('user_management.users.includes.modals.create')
@@ -68,7 +69,7 @@ User Management > Users
         $('#updateUser').attr('action', '/users/' + userid);
         $('input#name').val(username);
         $('input#email').val(useremail);
-        $('input#role').val(userrole).prop('selected', true);
+        $('select[name=role_id] option[value=' + userrole + ']').prop('selected', true);
     });
 
     $('.createUser').on('click', function() {

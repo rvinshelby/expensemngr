@@ -55,7 +55,7 @@
             Expense Management
         </div>
 
-        <li class="nav-item {{ (Request::segment(2) == 'expenses') ? 'active' : '' }}">
+        <li class="nav-item {{ (Request::segment(1) == 'expenses') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('expenses.index') }}" style="padding-bottom:0;">
                 <i class="fas fa-fw fa-id-card"></i>
                 <span>Expenses</span>

@@ -14,7 +14,7 @@ class UpdateExpenseRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->role->is_admin;
+        return true;
     }
 
     /**

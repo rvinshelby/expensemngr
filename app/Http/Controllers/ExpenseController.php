@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Expense;
+use App\ExpenseCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
@@ -16,7 +18,10 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        //
+        $expenses = Auth::user()->expenses()->paginate(10);
+        $cats = ExpenseCategory::all();
+
+        return view('expense_management.expenses.index', compact('expenses', 'cats'));
     }
 
     /**
@@ -40,6 +45,7 @@ class ExpenseController extends Controller
         if($request->validated()) {
             $expense = new Expense();
             $expense->fill($request->all());
+            $expense->user_id = Auth::user()->id;
             $expense->save();
 
             return redirect()->route('expenses.index')
@@ -88,6 +94,7 @@ class ExpenseController extends Controller
     {
         if($request->validated()) {
             $expense->fill($request->all());
+            $expense->user_id = Auth::user()->id;
             $expense->save();
 
             return redirect()->route('expenses.index')

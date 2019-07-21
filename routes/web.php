@@ -21,6 +21,7 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/getdata', 'HomeController@getStats')->name('get.data');
 
 Route::middleware(['auth'])->group(function(){
+    Route::post('/changepassword', 'UserController@changePassword')->name('user.changepassword');
     Route::resource('users', 'UserController')->except([
         'create', 'edit'
     ]);

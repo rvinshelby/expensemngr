@@ -17,6 +17,8 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::paginate(10);
+
+        return view('user_management.roles.index', compact('roles'));
     }
 
     /**
@@ -40,6 +42,7 @@ class RoleController extends Controller
         if($request->validated()) {
             $role = new Role();
             $role->fill($request->all());
+            $role->is_admin = isset($request->is_admin);
             $role->save();
 
             return redirect()->route('roles.index')
@@ -89,6 +92,7 @@ class RoleController extends Controller
     {
         if($request->validated()) {
             $role->fill($request->all());
+            $role->is_admin = isset($request->is_admin);
             $role->save();
 
             return redirect()->route('roles.index')

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
+use Auth;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\ChangePasswordRequest;
 
 class UserController extends Controller
 {
@@ -20,6 +23,28 @@ class UserController extends Controller
         $users = User::paginate(10);
         $roles = Role::all();
         return view('user_management.users.index', compact('users', 'roles'));
+    }
+
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        if($request->validated()) {
+            $user = Auth::user();
+            if(Hash::check($request->old_password, Auth::user()->password)) {
+                $user->password = bcrypt($request->password);
+                $user->save();
+                $stat = [
+                    'msg'       =>  'Password Changed Successfully.',
+                    'variant'   =>  'success',
+                ];
+            } else {
+                $stat = [
+                    'msg'       =>  'Old Password Incorrect.',
+                    'variant'   =>  'danger',
+                ];
+            }
+            return redirect()->back()
+                            ->with('status', $stat);
+        }
     }
 
     /**
@@ -43,6 +68,7 @@ class UserController extends Controller
         if($request->validated()) {
             $user = new User();
             $user->fill($request->all());
+            $user->password = bcrypt($request->password);
             $user->save();
 
             return redirect()->route('users.index')

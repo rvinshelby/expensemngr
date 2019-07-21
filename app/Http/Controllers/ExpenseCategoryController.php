@@ -16,7 +16,9 @@ class ExpenseCategoryController extends Controller
      */
     public function index()
     {
-        $cat = ExpenseCategory::paginate(10);
+        $cats = ExpenseCategory::paginate(10);
+
+        return view('expense_management.expenses_categories.index', compact('cats'));
     }
 
     /**
@@ -109,9 +111,9 @@ class ExpenseCategoryController extends Controller
      * @param  \App\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ExpenseCategory $expenseCategory)
+    public function destroy(ExpenseCategory $category)
     {
-        $expenseCategory->delete();
+        $category->delete();
         return redirect()->route('categories.index')
                             ->with('status', [
                             'msg'       =>  'Category Successfully Removed.',

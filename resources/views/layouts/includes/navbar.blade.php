@@ -15,6 +15,15 @@
 
             <div class="topbar-divider d-none d-sm-block"></div>
 
+            <li class="nav-item no-arrow" style="border-right:1px solid #efefef;">
+                    <div class="nav-link">
+                        <a class="mr-2 d-none d-lg-inline text-gray-600 small" href="#" data-toggle="modal" data-target="#changePasswordModal">
+                            {{-- <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> --}}
+                            Change Password
+                        </a>
+                    </div>
+            </li>
+
             <li class="nav-item no-arrow">
                     <div class="nav-link">
                         <a class="mr-2 d-none d-lg-inline text-gray-600 small" href="#" data-toggle="modal" data-target="#logoutModal">
