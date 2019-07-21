@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateExpenseCategoryRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdateExpenseCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->role()->is_admin;
+        return Auth::user()->role->is_admin;
     }
 
     /**
